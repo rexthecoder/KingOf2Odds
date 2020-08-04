@@ -1,6 +1,6 @@
 # kingof2odds
 
-A new Flutter project.
+#Project readme file loading 
 
 ## Getting Started
 
