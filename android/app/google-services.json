@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "929080094887",
+    "firebase_url": "https://kingsof2odds.firebaseio.com",
+    "project_id": "kingsof2odds",
+    "storage_bucket": "kingsof2odds.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929080094887:android:6167c52651ecbe9f986b82",
+        "android_client_info": {
+          "package_name": "com.example.kingof2odds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929080094887-pos73gkig6168i1fr9rf48m51tk1rq98.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kingof2odds",
+            "certificate_hash": "6d2ad3a7cee51db186f9a25f24880f44ff737a2f"
+          }
+        },
+        {
+          "client_id": "929080094887-f4okp3ho4lgo4s2gfjmuku2ferg8rsq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxPnFX7sAGsygbQNfVGgDx6eDScYuq8jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929080094887-f4okp3ho4lgo4s2gfjmuku2ferg8rsq2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
