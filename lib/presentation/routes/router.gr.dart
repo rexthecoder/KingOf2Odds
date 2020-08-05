@@ -9,15 +9,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../intro/intro.dart';
+import '../registration/registration.dart';
 import '../sign_in/sign_in_page.dart';
 import '../splash/splash_page.dart';
 
 class Routes {
   static const String splashPage = '/';
   static const String signInPage = '/sign-in-page';
+  static const String introScreen = '/intro-screen';
+  static const String resigrationScreen = '/resigration-screen';
   static const all = <String>{
     splashPage,
     signInPage,
+    introScreen,
+    resigrationScreen,
   };
 }
 
@@ -27,6 +33,8 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.splashPage, page: SplashPage),
     RouteDef(Routes.signInPage, page: SignInPage),
+    RouteDef(Routes.introScreen, page: IntroScreen),
+    RouteDef(Routes.resigrationScreen, page: ResigrationScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -43,6 +51,18 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    IntroScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => IntroScreen(),
+        settings: data,
+      );
+    },
+    ResigrationScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ResigrationScreen(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -54,4 +74,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushSplashPage() => push<dynamic>(Routes.splashPage);
 
   Future<dynamic> pushSignInPage() => push<dynamic>(Routes.signInPage);
+
+  Future<dynamic> pushIntroScreen() => push<dynamic>(Routes.introScreen);
+
+  Future<dynamic> pushResigrationScreen() =>
+      push<dynamic>(Routes.resigrationScreen);
 }
