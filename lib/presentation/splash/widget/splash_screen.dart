@@ -1,7 +1,8 @@
-import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
 import 'package:kingof2odds/infrastructure/assets/appcolors.dart';
-import 'package:kingof2odds/presentation/routes/router.gr.dart';
+import 'package:kingof2odds/presentation/intro/introbloc.dart';
+import 'package:kingof2odds/presentation/intro/widget/intro.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 class AppSplashScreen extends StatelessWidget {
@@ -16,10 +17,9 @@ class AppSplashScreen extends StatelessWidget {
         child: Center(
           child: SplashScreen(
             image: Image.asset("assets/images/logo.png"),
-            seconds: 500,
+            seconds: 6,
             backgroundColor: AppColors.bg,
-            navigateAfterSeconds:
-                ExtendedNavigator.of(context).push(Routes.introScreen),
+            navigateAfterSeconds: IntroBloc(),
             photoSize: 100,
             loaderColor: AppColors.bg,
           ),

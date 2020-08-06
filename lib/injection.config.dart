@@ -7,7 +7,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
-import 'package:injectable/get_it_helper.dart';
+import 'package:injectable/injectable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'application/auth/auth_bloc.dart';
@@ -19,16 +19,21 @@ import 'application/auth/sign_in_form/sign_in_form_bloc.dart';
 /// adds generated dependencies
 /// to the provided [GetIt] instance
 
-void $initGetIt(GetIt g, {String environment}) {
-  final gh = GetItHelper(g, environment);
+GetIt $initGetIt(
+  GetIt get, {
+  String environment,
+  EnvironmentFilter environmentFilter,
+}) {
+  final gh = GetItHelper(get, environment, environmentFilter);
   final firebaseInjectableModule = _$FirebaseInjectableModule();
   gh.lazySingleton<FirebaseAuth>(() => firebaseInjectableModule.firebaseAuth);
   gh.lazySingleton<Firestore>(() => firebaseInjectableModule.firestore);
   gh.lazySingleton<GoogleSignIn>(() => firebaseInjectableModule.googleSignIn);
   gh.lazySingleton<IAuthFacade>(
-      () => FirebaseAuthFacade(g<FirebaseAuth>(), g<GoogleSignIn>()));
-  gh.factory<SignInFormBloc>(() => SignInFormBloc(g<IAuthFacade>()));
-  gh.factory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
+      () => FirebaseAuthFacade(get<FirebaseAuth>(), get<GoogleSignIn>()));
+  gh.factory<SignInFormBloc>(() => SignInFormBloc(get<IAuthFacade>()));
+  gh.factory<AuthBloc>(() => AuthBloc(get<IAuthFacade>()));
+  return get;
 }
 
 class _$FirebaseInjectableModule extends FirebaseInjectableModule {}

@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kingof2odds/infrastructure/assets/appcolors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kingof2odds/presentation/routes/router.gr.dart';
+
 final List<Widget> imgList = [
   introContainer("Get started",
       "If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on."),
@@ -38,7 +39,7 @@ Container introContainer([String text1, String text2]) {
                   text1,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
-                     color: Colors.white,
+                    color: Colors.white,
                     fontSize: 25,
                   ),
                 ),
@@ -77,15 +78,15 @@ Container introContainer([String text1, String text2]) {
           ],
         ),
         Container(
-          padding: EdgeInsets.only(left:10,right: 10),
+          padding: EdgeInsets.only(left: 10, right: 10),
           child: text2 == null
               ? Text("")
               : Text(
                   text2,
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 15,
-                    
                   ),
                 ),
         ),
@@ -155,10 +156,13 @@ class _IntroScreenState extends State<IntroScreen> {
                   onTap: () => _controller.jumpToPage(2),
                   child: introBtn(color: Color(0xff78849E29), text: "SKIP")),
               GestureDetector(
-                  onTap: (){ 
+                  onTap: () {
                     _controller.nextPage();
-                     _current == 2 ?  ExtendedNavigator.of(context).push(Routes.resigrationScreen) : print("current is not complete");
-                  } ,
+                    _current == 2
+                        ? ExtendedNavigator.of(context)
+                            .push(Routes.resigrationScreen)
+                        : print("current is not complete");
+                  },
                   child: introBtn(
                       color: Color(0xff7FBF3F),
                       text: _current == 2 ? "Done" : "NEXT")),
@@ -176,8 +180,11 @@ class _IntroScreenState extends State<IntroScreen> {
         width: 130.0,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.circular(20)),
-        child: Text(text));
+            color: color, borderRadius: BorderRadius.circular(10)),
+        child: Text(text,style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),));
   }
 
   final List<Widget> imageSliders = imgList

@@ -3,6 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kingof2odds/infrastructure/assets/appcolors.dart';
 import 'package:kingof2odds/infrastructure/assets/imageassets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kingof2odds/infrastructure/assets/resuable.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:kingof2odds/presentation/routes/router.gr.dart';
 
 class ResigrationScreen extends StatelessWidget {
   @override
@@ -14,7 +17,8 @@ class ResigrationScreen extends StatelessWidget {
           decoration: BoxDecoration(
               color: AppColors.bg,
               image: DecorationImage(
-                  // colorFilter: ColorFilter.mode(AppColors.bg, BlendMode.srcOver),
+                  colorFilter:
+                      ColorFilter.mode(AppColors.bg, BlendMode.hardLight),
                   fit: BoxFit.contain,
                   image: AppImage.logo)),
           child: Column(
@@ -35,13 +39,18 @@ class ResigrationScreen extends StatelessWidget {
               ),
               Column(
                 children: <Widget>[
-                  signUpBtn(
-                      text: "Sign in with email",
-                      icons: FaIcon(
-                        FontAwesomeIcons.envelope,
-                        color: Colors.red,
-                        size: 30,
-                      )),
+                  GestureDetector(
+                    onTap: () {
+                        ExtendedNavigator.of(context).push(Routes.signInWithEmailLogIn);
+                    },
+                    child: signUpBtn(
+                        text: "Sign in with email",
+                        icons: FaIcon(
+                          FontAwesomeIcons.envelope,
+                          color: Colors.red,
+                          size: 25,
+                        )),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -61,7 +70,7 @@ class ResigrationScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 15,
                         ),
                       ),
                       Padding(
@@ -80,16 +89,16 @@ class ResigrationScreen extends StatelessWidget {
                   ),
                   signUpBtn(
                       text: "Sign in with Google",
-                      icons: Image(image: AppImage.google)),
+                      icons: Image(height: 25, image: AppImage.google)),
                   SizedBox(
                     height: 20,
                   ),
                   signUpBtn(
-                      text: "Sign in with Google",
+                      text: "Sign in with Facebook",
                       icons: FaIcon(
                         FontAwesomeIcons.facebookSquare,
                         color: Colors.blue,
-                        size: 30,
+                        size: 27,
                       )),
                   SizedBox(
                     height: 20,
@@ -106,13 +115,18 @@ class ResigrationScreen extends StatelessWidget {
               SizedBox(
                 height: 120,
               ),
-              Container(
-                child: Text(
-                  "New here? Create Account",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 17,
+              GestureDetector(
+                onTap: () {
+                  ExtendedNavigator.of(context).push(Routes.signUpScreen);
+                },
+                child: Container(
+                  child: Text(
+                    "New here? Create Account",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
               ),
@@ -125,32 +139,13 @@ class ResigrationScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 14,
                   ),
                 ),
               )
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Container signUpBtn({Widget icons, String text}) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      width: double.infinity,
-      height: 55.0,
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(child: icons),
-          SizedBox(
-            width: 10,
-          ),
-          Container(child: Text(text))
-        ],
       ),
     );
   }
