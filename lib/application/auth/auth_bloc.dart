@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kingof2odds/domain/auth/i_auth_facade.dart';
 import 'package:meta/meta.dart';
-
+import 'package:finished_notes_firebase_ddd_course/domain/auth/user.dart';
+import 'package:finished_notes_firebase_ddd_course/domain/auth/i_auth_facade.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -16,7 +16,7 @@ part 'auth_bloc.freezed.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _authFacade;
 
-  AuthBloc(this._authFacade) : super(null);
+  AuthBloc(this._authFacade);
 
   @override
   AuthState get initialState => const AuthState.initial();
@@ -30,7 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final userOption = await _authFacade.getSignedInUser();
         yield userOption.fold(
           () => const AuthState.unauthenticated(),
-          (_) => const AuthState.authenticated(),
+          (user) => AuthState.authenticated(user),
         );
       },
       signedOut: (e) async* {

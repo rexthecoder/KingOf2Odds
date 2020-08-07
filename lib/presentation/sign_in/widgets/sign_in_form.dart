@@ -37,7 +37,7 @@ class SignInForm extends StatelessWidget {
       },
       builder: (context, state) {
         return Form(
-          autovalidate: state.showErrorMessages,
+          // autovalidate: state.showErrorMessages,
           child: ListView(
             padding: const EdgeInsets.all(8),
             children: [
@@ -131,10 +131,10 @@ class SignInForm extends StatelessWidget {
                   ),
                 ),
               ),
-              if (state.isSubmitting) ...[
-                const SizedBox(height: 8),
-                const LinearProgressIndicator(value: null),
-              ]
+              // if (state.isSubmitting) ...[
+              //   const SizedBox(height: 8),
+              //   const LinearProgressIndicator(value: null),
+              // ]
             ],
           ),
         );
