@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:kingof2odds/app/intro/widget/intro.dart';
 import 'package:kingof2odds/constants/assets/appcolors.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -18,7 +19,7 @@ class AppSplashScreen extends StatelessWidget {
             seconds: 6,
             backgroundColor: AppColors.bg,
             //  Here is where navigation start 
-            // navigateAfterSeconds: IntroScreen(),
+            navigateAfterSeconds: IntroScreen(),
             photoSize: 100,
             loaderColor: AppColors.bg,
           ),

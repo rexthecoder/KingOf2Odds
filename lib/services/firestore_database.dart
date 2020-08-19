@@ -59,4 +59,4 @@
 //         builder: (data, documentID) => Entry.fromMap(data, documentID),
 //         sort: (lhs, rhs) => rhs.start.compareTo(lhs.start),
 //       );
-}
+// }

@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:kingof2odds/presentation/splash/widget/splash_screen.dart';
+
+import 'widget/splash_screen.dart';
+// import 'package:kingof2odds/presentation/splash/widget/splash_screen.dart';
 
 class SplashPage extends StatelessWidget {
   @override
