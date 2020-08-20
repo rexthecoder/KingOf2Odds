@@ -1,15 +1,17 @@
+
+
 import 'package:auth_widget_builder/auth_widget_builder.dart';
-import 'package:starter_architecture_flutter_firebase/app/home/home_page.dart';
-import 'package:starter_architecture_flutter_firebase/app/sign_in/sign_in_page.dart';
-import 'package:starter_architecture_flutter_firebase/routing/router.dart';
+import 'package:firebase_auth_service/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:starter_architecture_flutter_firebase/services/firestore_database.dart';
-import 'package:firebase_auth_service/firebase_auth_service.dart';
+
+
+import 'app/splash/splash_page.dart';
+import 'services/firestore_database.dart';
 
 void main() => runApp(MyApp(
       authServiceBuilder: (_) => FirebaseAuthService(),
-      databaseBuilder: (_, uid) => FirestoreDatabase(uid: uid),
+      // databaseBuilder: (_, uid) => FirestoreDatabase(uid: uid),
     ));
 
 class MyApp extends StatelessWidget {
@@ -43,13 +45,22 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: AuthWidget(
               userSnapshot: userSnapshot,
-              nonSignedInBuilder: (_) => SignInPageBuilder(),
+              nonSignedInBuilder: (_) => SplashPage(),
               signedInBuilder: (_) => HomePage(),
-            ),
-            onGenerateRoute: Router.onGenerateRoute,
-          );
-        },
-      ),
+                          ),
+                      
+                        );
+                      },
+                    ),
+                  );
+                }
+              }
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
     );
   }
 }
