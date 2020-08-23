@@ -58,6 +58,10 @@ dependencies:
   splashscreen: ^1.2.0
   carousel_slider: ^2.2.1
   google_fonts: ^1.1.0
+  smooth_page_indicator: ^0.2.0
+  syncfusion_flutter_pdf: ^18.2.54-beta
+  path_provider:
+  open_file: 
 dev_dependencies:
   flutter_test:
     sdk: flutter

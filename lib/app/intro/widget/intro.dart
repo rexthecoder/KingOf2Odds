@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kingof2odds/app/registration/log_in.dart';
 import 'package:kingof2odds/constants/assets/appcolors.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 
 final List<Widget> imgList = [
@@ -17,7 +20,8 @@ final List<Widget> imgList = [
 ];
 Container introContainer([String text1, String text2]) {
   return Container(
-    // margin: EdgeInsets.symmetric(vertical: 10.0,),
+    margin: EdgeInsets.only(right: 10.0,),
+
     alignment: Alignment.center,
     height: 500,
     width: 250,
@@ -27,11 +31,12 @@ Container introContainer([String text1, String text2]) {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        SizedBox(
-          height: 30,
-        ),
+        // SizedBox(
+        //   height: 30,
+        // ),
         Container(
           alignment: Alignment.center,
+          margin: EdgeInsets.only(top:20),
           child: text1 == null
               ? Text("")
               : Text(
@@ -103,8 +108,8 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  int _current = 0;
-  final CarouselController _controller = CarouselController();
+int _current;
+  final controller = PageController(viewportFraction: 0.8);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,51 +119,34 @@ class _IntroScreenState extends State<IntroScreen> {
           SizedBox(
             height: 30,
           ),
-          CarouselSlider(
-            items: imageSliders,
-            carouselController: _controller,
-            options: CarouselOptions(
-                height: 500,
-                carouselController: _controller,
-                // autoPlay: true,
-                enlargeCenterPage:
-                    _current == 0 ? true : _current == 2 ? true : false,
-                // enlargeStrategy: Enlar,
-                // aspectRatio: 2.0,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.map((url) {
-              int index = imgList.indexOf(url);
-              return Container(
-                width: 8.0,
-                height: 8.0,
-                margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: _current == index
-                      ? Color(0xff665EFF)
-                      : Color.fromRGBO(0, 0, 0, 0.4),
-                ),
-              );
-            }).toList(),
-          ),
-          Row(
+               SizedBox(
+              height: 500,
+              child: PageView(
+                controller: controller,
+                children: imgList,
+                onPageChanged:   _onPageViewChange,
+              ),
+            ),
+            SizedBox(height: 16),
+            Container(
+              child: SmoothPageIndicator(
+                controller: controller,
+                count: 3,
+
+                effect: WormEffect(),
+              ),
+            ),
+               Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               GestureDetector(
-                  onTap: () => _controller.jumpToPage(2),
+                  onTap: () => controller.jumpToPage(2),
                   child: introBtn(color: Color(0xff78849E29), text: "SKIP")),
               GestureDetector(
                   onTap: () {
-                    _controller.nextPage();
+                    controller.nextPage(curve: Curves.bounceIn,duration:Duration(seconds: 1));
                     _current == 2
-                        ?  print("Here is where routing goes")
+                        ?  Navigator.pushReplacement(context, CupertinoPageRoute(builder: (BuildContext context) => ResigrationScreen()))
                          //Router.navigator.pushReplacementNamed(Router.resigrationScreen) 
                         : print("current is not complete");
                   },
@@ -167,11 +155,70 @@ class _IntroScreenState extends State<IntroScreen> {
                       text: _current == 2 ? "Done" : "NEXT")),
             ],
           )
+          // CarouselSlider(
+          //   items: imageSliders,
+          //   carouselController: _controller,
+          //   options: CarouselOptions(
+          //       height: 500,
+          //       carouselController: _controller,
+          //       // autoPlay: true,
+          //       enlargeCenterPage:
+          //           _current == 0 ? true : _current == 2 ? true : false,
+          //       // enlargeStrategy: Enlar,
+          //       // aspectRatio: 2.0,
+          //       onPageChanged: (index, reason) {
+          //         setState(() {
+          //           _current = index;
+          //         });
+          //       }),
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: imgList.map((url) {
+          //     int index = imgList.indexOf(url);
+          //     return Container(
+          //       width: 8.0,
+          //       height: 8.0,
+          //       margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
+          //       decoration: BoxDecoration(
+          //         shape: BoxShape.circle,
+          //         color: _current == index
+          //             ? Color(0xff665EFF)
+          //             : Color.fromRGBO(0, 0, 0, 0.4),
+          //       ),
+          //     );
+          //   }).toList(),
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: <Widget>[
+          //     GestureDetector(
+          //         onTap: () => _controller.jumpToPage(2),
+          //         child: introBtn(color: Color(0xff78849E29), text: "SKIP")),
+          //     GestureDetector(
+          //         onTap: () {
+          //           _controller.nextPage();
+          //           _current == 2
+          //               ?  print("Here is where routing goes")
+          //                //Router.navigator.pushReplacementNamed(Router.resigrationScreen) 
+          //               : print("current is not complete");
+          //         },
+          //         child: introBtn(
+          //             color: Color(0xff7FBF3F),
+          //             text: _current == 2 ? "Done" : "NEXT")),
+          //   ],
+          // )
         ]),
       ),
     );
+    
   }
-
+  _onPageViewChange(int page) {   
+    print("Current Page: " + page.toString());
+    setState(() {
+     _current = page.toInt();
+    });
+  }
   Container introBtn({String text, Color color}) {
     return Container(
         height: 50.0,
