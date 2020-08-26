@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:firebase_auth_service/firebase_auth_service.dart';
@@ -22,6 +23,6 @@ class SignInViewModel with ChangeNotifier {
   }
 
   Future<User> signInAnonymously() async {
-    return _signIn(auth.signInAnonymously);
+    // return _signIn(auth.signInAnonymously());
   }
 }

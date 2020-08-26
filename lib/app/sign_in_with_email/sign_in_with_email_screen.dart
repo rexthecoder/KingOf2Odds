@@ -48,7 +48,7 @@ class SignInWithEmailLogIn extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: FlatButton(
                       color: Colors.white, onPressed: () {
-                        Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => HomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => HomePage()));
                       }, child: Text("Next")),
                 )
               ],

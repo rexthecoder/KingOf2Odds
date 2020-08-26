@@ -11,37 +11,42 @@ import 'package:fancy_dialog/FancyTheme.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
 
 const List<Key> keys = [
-      Key("Fancy"),
-      Key("Flat"),
-    ];
-    
+  Key("Fancy"),
+  Key("Flat"),
+];
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  TabController _controller;
+
   GlobalKey btnKey = GlobalKey();
   bool _value = false;
   PopupMenu menu;
 
   @override
   void initState() {
-    
+    _controller = TabController(vsync: this, length: 4);
+
+    // }
     menu = PopupMenu(items: [
       // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
       // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
       MenuItem(
-          title: 'Mail',
+          title: 'Sign Out',
           image: Icon(
-            Icons.mail,
+            Icons.arrow_back,
             color: Colors.white,
           )),
       MenuItem(
-          title: 'Power',
+          title: 'Mute',
           image: Icon(
-            Icons.power,
+            Icons.notifications_off,
             color: Colors.white,
           )),
       MenuItem(
@@ -71,6 +76,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     PopupMenu.context = context;
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -238,6 +244,7 @@ class _HomePageState extends State<HomePage> {
           bottom: TabBar(
             indicatorColor: Color(0xffF0C023),
             indicatorSize: TabBarIndicatorSize.tab,
+            controller: _controller,
             tabs: [
               Tab(
                 child: Text("FREE",
@@ -280,6 +287,7 @@ class _HomePageState extends State<HomePage> {
               }),
         ),
         body: TabBarView(
+          controller: _controller,
           children: [
             Container(
                 height: 200,
@@ -288,6 +296,7 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: false,
                     itemCount: 10,
                     itemBuilder: (context, index) {
+                   
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,34 +347,34 @@ class _HomePageState extends State<HomePage> {
                                   image: null)
                             ],
                           )
+                          
                         ],
                       );
+                      
                     })),
-            Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: RaisedButton(
-                key: keys[0],
-                child: Text(
-                  "Fancy Dialog",
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                ),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => FancyDialog(
-                            title: "Fancy Gif Dialog",
-                            descreption:
-                                "This is descreption for fancy gif,you can load any image or gif to be displayed :), and you can choose between two themes Fancy and Flat",
-                            animationType: FancyAnimation.BOTTOM_TOP,
-                            theme: FancyTheme.FANCY,
-                            gifPath:
-                                FancyGif.MOVE_FORWARD, //'./assets/walp.png',
-                            okFun: () {
-                              print("it's working :)");
-                            },
-                          ));
-                },
+            RaisedButton(
+              color: AppColors.bg,
+              key: keys[0],
+              child: Text(
+                "Subscription Dialog",
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => FancyDialog(
+                          title: "Regular Subscription",
+                          descreption:
+                              "This is descreption for fancy gif,you can load any image or gif to be displayed :), and you can choose between two themes Fancy and Flat",
+                          animationType: FancyAnimation.BOTTOM_TOP,
+                          theme: FancyTheme.FANCY,
+                          gifPath:
+                              FancyGif.MOVE_FORWARD, //'./assets/walp.png',
+                          okFun: () {
+                            print("it's working :)");
+                          },
+                        ));
+              },
             ),
             Icon(Icons.directions_bike),
             Icon(Icons.directions_bike),
