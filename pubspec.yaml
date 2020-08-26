@@ -59,6 +59,9 @@ dependencies:
   carousel_slider: ^2.2.1
   google_fonts: ^1.1.0
   smooth_page_indicator: ^0.2.0
+  flag: 
+  popup_menu: ^1.0.5
+  fancy_dialog: ^1.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
